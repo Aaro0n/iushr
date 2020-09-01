@@ -1,4 +1,4 @@
-# vue_sample
+# iushr
 
 ## Project setup
 ```
