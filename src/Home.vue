@@ -22,7 +22,7 @@ export default {
   name: "Home",
   data() {
     return {
-      title: ">>>",
+      title: "iushr",
       articles: []
     }
   },
@@ -60,10 +60,9 @@ a:hover {
   z-index: 10;
   width: 48px;
   height: 48px;
-  background: black;
-  color: white;
+  color: black;
   text-align: center;
-  font-size: 10px;
+  font-size: 30px;
   line-height: 48px;
   margin-top: 20px;
   margin-left: 20px;

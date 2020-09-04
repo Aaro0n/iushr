@@ -1,5 +1,5 @@
 <template>
-  <div id="TabsTest">
+  <div id="Tab">
     <el-tabs v-show="false" v-model="activeName" @tab-click="handleClick" ref="tabs" stretch="true"
              tab-position="top">
       <el-tab-pane v-for="item in nameList" v-bind:key="item.id" v-bind:label="item.title"
@@ -12,14 +12,18 @@
       </el-tab-pane>
     </el-tabs>
 
-<!--    <el-button v-show="true" type="primary" @click="jump">主要按钮</el-button>-->
-<!--    <el-button v-show="true" type="primary" @click="blog">跳转到Blog</el-button>-->
+    <!--    <el-button v-show="true" type="primary" @click="jump">主要按钮</el-button>-->
+    <!--    <el-button v-show="true" type="primary" @click="blog">跳转到Blog</el-button>-->
     <el-button v-show="false" type="primary" @click="request">请求数据</el-button>
 
     <!-- 使用 router-link 组件来导航. -->
     <!-- 通过传入 `to` 属性指定链接. -->
     <!-- <router-link> 默认会被渲染成一个 `<a>` 标签 -->
-     <router-link to="/home">Go to Home</router-link>
+    <router-link to="/home">Home</router-link>
+    <br>
+    <router-link to="/upload">Upload</router-link>
+    <br>
+    <router-link to="/login">Login</router-link>
     <!-- <router-link to="/bar">Go to Bar</router-link>-->
     <!-- <router-link to="/user/test">Go to User</router-link>-->
 
@@ -36,7 +40,7 @@ import TestButton from "@/components/TestButton";
 
 export default {
 
-  name: "TabTest",
+  name: "Tab",
   components: {TestButton},
   data() {
     return {
@@ -59,7 +63,6 @@ export default {
       })
     })
   },
-
 
 
   computed: {
