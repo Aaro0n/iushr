@@ -5,7 +5,7 @@ import Tab from '@/Tab'
 import ToDo from "@/ToDo";
 import Blog from "@/Blog";
 import Home from "@/Home";
-import Upload from "@/components/Upload"
+import Upload from "@/Upload"
 import Login from "@/Login"
 
 Vue.use(Router)
@@ -16,8 +16,8 @@ const routeMap = [
     {path: '/todo', component: ToDo},
     {path: '/blog/:id', component: Blog},
     {path: '/home', component: Home},
-    {path: '/upload',component: Upload},
-    {path: '/login',component: Login}
+    {path: '/upload', component: Upload},
+    {path: '/login', component: Login}
 ];
 
 const router = new Router({
@@ -33,5 +33,4 @@ router.beforeEach((to, from, next) => {
     }
     console.log(to.path);
     next()
-
 });
