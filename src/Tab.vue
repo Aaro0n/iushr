@@ -13,7 +13,6 @@
 </template>
 
 <script>
-import axios from 'axios'
 import TestButton from "@/components/TestButton";
 
 export default {
