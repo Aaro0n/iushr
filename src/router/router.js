@@ -5,8 +5,9 @@ import Tab from '@/Tab'
 import ToDo from "@/ToDo";
 import Blog from "@/Blog";
 import Home from "@/Home";
-import Upload from "@/Upload"
-import Login from "@/Login"
+import Upload from "@/Upload";
+import Login from "@/Login";
+import Editor from '@/Editor';
 
 Vue.use(Router)
 
@@ -17,7 +18,8 @@ const routeMap = [
     {path: '/blog/:id', component: Blog},
     {path: '/home', component: Home},
     {path: '/upload', component: Upload},
-    {path: '/login', component: Login}
+    {path: '/login', component: Login},
+    {path: '/editor', component: Editor},
 ];
 
 const router = new Router({
