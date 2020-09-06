@@ -1,9 +1,12 @@
 <template>
-  <div>
+  <div id="editor">
     <div id="header">
-      <button v-on:click="publish">发布</button>
+      <el-button size="medium" plain v-on:click="publish">发布</el-button>
+      <el-button size="medium" plain v-on:click="publish">保存</el-button>
     </div>
-    <textarea id="editor" v-model="content"></textarea>
+    <div id="content">
+      <textarea id="text" v-model="content"></textarea>
+    </div>
   </div>
 </template>
 
@@ -40,20 +43,37 @@ export default {
 
 <style scoped>
 
+#editor {
+  height: 100%;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+}
+
 #header {
   display: flex;
-  height: 80px;
+  justify-content: flex-end;
+  align-items: center;
+  height: 10%;
+  margin-right: 20px;
 }
 
-#header button {
-  height: 30px;
-  width: 80px;
-  margin-right: 10px;
+#content {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  height: 100%;
 }
 
-#editor {
-  height: 400px;
-  width: 400px;
+#text {
+  height: 85%;
+  width: 80%;
+  border: none;
+  border-radius: 1px;
+  background-color: #f1f1f1;
+  resize: none;
+  cursor: pointer;
+  font-size: 20px;
 }
 
 </style>
