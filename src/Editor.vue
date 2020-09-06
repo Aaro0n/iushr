@@ -1,8 +1,8 @@
 <template>
   <div id="editor">
     <div id="header">
-      <el-button size="medium" plain v-on:click="publish">发布</el-button>
-      <el-button size="medium" plain v-on:click="publish">保存</el-button>
+      <el-button size="medium" plain v-on:click="publish(0)">发布</el-button>
+      <el-button size="medium" plain v-on:click="publish(1)">保存</el-button>
     </div>
     <div id="content">
       <textarea id="text" v-model="content"></textarea>
@@ -15,15 +15,18 @@ import axios from "axios";
 
 export default {
   name: "Editor",
-  data: {
-    content: "",
+  data() {
+    return {
+      content: "",
+    }
   },
 
   methods: {
-    publish: function () {
+    publish: function (type) {
       let article = {
-        'title': this.content.substring(0, this.content.indexOf('\n')),
-        'content': this.content
+        'title': this.content.substring(0, this.content.indexOf('\n')).replace(/#/g, "").trim(),
+        'content': this.content,
+        'type': type,
       }
       axios.post('http://127.0.0.1:8081/article',
           article,
