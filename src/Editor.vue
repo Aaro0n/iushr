@@ -3,6 +3,7 @@
     <div id="header">
       <el-button size="medium" plain v-on:click="publish(0)">发布</el-button>
       <el-button size="medium" plain v-on:click="publish(1)">保存</el-button>
+      <el-button size="medium" plain v-on:click="publish(1)">预览</el-button>
     </div>
     <div id="content">
       <textarea id="text" v-model="content"></textarea>

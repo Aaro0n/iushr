@@ -1,10 +1,6 @@
 <template>
   <div id="home">
-
-<!--    <div id="logo">-->
-      <div id="logo">{{ title }}</div>
-<!--    </div>-->
-
+    <div id="logo">{{ title }}</div>
     <div id="blogs">
       <ul>
         <li v-for="article in articles" :key="article.id" id="title">
@@ -77,11 +73,6 @@ a:hover {
   margin-bottom: 80px;
 }
 
-/*ul{*/
-/*  width: 400px;*/
-/*  height: 400px;*/
-/*}*/
-
 #title {
   font-size: 20px;
   padding-bottom: 5px;
@@ -98,10 +89,8 @@ ul {
   list-style-type: none;
 }
 
-
 li {
   border-bottom: 1px solid #f3f3f3;
 }
-
 
 </style>

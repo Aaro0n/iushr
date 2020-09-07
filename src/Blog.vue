@@ -24,7 +24,7 @@ export default {
   mounted() {
 
     marked.setOptions({
-      highlight: function(code) {
+      highlight: function (code) {
         return hljs.highlightAuto(code).value;
       },
       pedantic: false, //只解析符合Markdown定义的，不修正Markdown的错误。填写true或者false
@@ -39,16 +39,14 @@ export default {
 
     axios.get("http://127.0.0.1:8081/article/" + this.articleId).then(response => {
       this.article = response.data.data
-      console.log(this.article)
       this.rawHtml = marked(this.article.content).replace(/<pre>/g, "<pre class='hljs'>")
-      console.log(marked(this.article.content))
     })
   }
-
 }
 </script>
 
 <style scoped>
+
 #markdown {
   display: flex;
   justify-content: center;
@@ -56,4 +54,5 @@ export default {
   padding-left: 80px;
   padding-right: 80px;
 }
+
 </style>
