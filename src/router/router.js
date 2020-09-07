@@ -8,6 +8,7 @@ import Home from "@/Home";
 import Upload from "@/Upload";
 import Login from "@/Login";
 import Editor from '@/Editor';
+import Admin from '@/Admin'
 
 Vue.use(Router)
 
@@ -20,6 +21,7 @@ const routeMap = [
     {path: '/upload', component: Upload},
     {path: '/login', component: Login},
     {path: '/editor', component: Editor},
+    {path: '/admin', component: Admin},
 ];
 
 const router = new Router({
