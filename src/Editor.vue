@@ -1,11 +1,15 @@
 <template>
   <div id="editor">
-    <div id="header">
+    <div v-show="showMD" id="markdown">
+      <i class="el-icon-close" id="closeBtn" v-on:click="closeMarkdown"></i>
+      <p v-html="rawHtml"></p>
+    </div>
+    <div id="header" v-show="showED">
       <el-button size="medium" plain v-on:click="publish(0)">发布</el-button>
       <el-button size="medium" plain v-on:click="publish(1)">保存</el-button>
-      <el-button size="medium" plain v-on:click="publish(1)">预览</el-button>
+      <el-button size="medium" plain v-on:click="preview">预览</el-button>
     </div>
-    <div id="content">
+    <div id="content" v-show="showED">
       <textarea id="text" v-model="content"></textarea>
     </div>
   </div>
@@ -13,12 +17,18 @@
 
 <script>
 import axios from "axios";
+import marked from 'marked';
+import hljs from 'highlight.js';
+import 'highlight.js/styles/tomorrow-night.css';
 
 export default {
   name: "Editor",
   data() {
     return {
+      showMD: false,
+      showED: !this.showMD,
       content: "",
+      rawHtml: "xxxx",
     }
   },
 
@@ -40,7 +50,32 @@ export default {
       ).then(response => {
         console.log(response.data)
       })
+    },
+    preview: function () {
+      this.rawHtml = marked(this.content).replace(/<pre>/g, "<pre class='hljs'>")
+      this.showMD = true
+      this.showED = false
+    },
+    closeMarkdown: function () {
+      this.showMD = false
+      this.showED = true
     }
+  },
+  mounted() {
+
+    marked.setOptions({
+      highlight: function (code) {
+        return hljs.highlightAuto(code).value;
+      },
+      pedantic: false, //只解析符合Markdown定义的，不修正Markdown的错误。填写true或者false
+      gfm: true,
+      tables: true, //支持Github形式的表格，必须打开gfm选项
+      breaks: true, //支持Github换行符，必须打开gfm选项，填写true或者false
+      sanitize: false, //原始输出，忽略HTML标签，这个作为一个开发人员，一定要写flase
+      smartLists: true, //优化列表输出，这个填写ture之后，你的样式会好看很多，所以建议设置成ture
+      smartypants: true,
+      xhtml: false
+    });
   }
 }
 </script>
@@ -52,6 +87,14 @@ export default {
   width: 100%;
   padding: 0;
   margin: 0;
+}
+
+#markdown {
+  padding: 30px 80px;
+}
+
+#closeBtn {
+  float: right;
 }
 
 #header {

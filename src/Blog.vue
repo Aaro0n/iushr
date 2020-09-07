@@ -12,7 +12,7 @@ import hljs from 'highlight.js';
 import 'highlight.js/styles/tomorrow-night.css';
 
 export default {
-  name: "blog",
+  name: "Blog",
   data() {
     return {
       rawHtml: "",
