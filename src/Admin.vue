@@ -4,7 +4,7 @@
 
     <div>
       <el-table :data="articles" style="width: 100%"
-                max-height="350">
+                max-height="390">
 
         <el-table-column
             prop="updateTime"
@@ -15,16 +15,28 @@
         <el-table-column
             prop="title"
             label="标题"
-            width="180">
+            width="200">
         </el-table-column>
 
         <el-table-column
-            fixed="right"
             label="操作"
             width="100">
           <template slot-scope="scope">
-            <el-button type="text" size="small">查看</el-button>
+            <el-button type="text" size="small" v-on:click="preview(scope.row)">查看</el-button>
             <el-button @click="editor(scope.row)" type="text" size="small">编辑</el-button>
+          </template>
+        </el-table-column>
+
+        <el-table-column
+            label="发布"
+            width="80">
+          <template slot-scope="scope">
+            <el-switch
+                @change="changeStatus(scope.row)"
+                v-model="scope.row.type"
+                active-color="#13ce66"
+                inactive-color="#ff4949">
+            </el-switch>
           </template>
         </el-table-column>
 
@@ -41,6 +53,7 @@ export default {
   data() {
     return {
       articles: [],
+      publish: true,
     }
   },
 
@@ -49,11 +62,34 @@ export default {
       console.log(article)
       localStorage.setItem('article', article)
       this.$router.push('/editor')
+    },
+    changeStatus: function (param) {
+      let typeValue = param.type === true ? 0 : 1
+      let formData = new FormData()
+      formData.append('type', typeValue)
+      axios.post('http://127.0.0.1:8081/article/' + param.id,
+          formData,
+          {
+            headers: {
+              'Content-Type': 'application/x-www-form-urlencoded',
+              'token': localStorage.getItem('token')
+            }
+          }
+      ).then(response => {
+        console.log(response.data)
+      })
+    },
+    preview: function (param) {
+      this.$router.push('/blog/' + param.id)
     }
+
   },
   mounted() {
     axios.get("http://127.0.0.1:8081/article").then(response => {
       this.articles = response.data.data
+      this.articles.forEach(it => {
+        it.type = it.type === 0
+      })
       console.log(this.articles)
     })
   },
