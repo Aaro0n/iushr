@@ -12,7 +12,7 @@
         <el-button size="medium" plain v-on:click="preview">预览</el-button>
       </div>
     </div>
-    <div id="content" v-show="showED">
+    <div id="content" v-show="showED" @dragover.prevent @dragenter.prevent @dragleave.prevent v-on:drop="drop">
       <textarea placeholder="Start Type!!!" v-model="content"></textarea>
     </div>
   </div>
@@ -31,7 +31,7 @@ export default {
       article: null,
       showMD: false,
       showED: true,
-      content: '',
+      content: "",
       rawHtml: "",
     }
   },
@@ -78,6 +78,30 @@ export default {
       this.$router.push('/admin')
     },
 
+    drop: function (event) {
+      event.preventDefault();
+      let file = event.dataTransfer.files[0]
+      console.log("drop" + file.type)
+      let formData = new FormData();
+      formData.append("file", file)
+      axios.post('http://127.0.0.1:8081/upload',
+          formData,
+          {
+            headers: {
+              'Content-Type': 'multipart/form-data',
+              'token': localStorage.getItem('token')
+            },
+            onUploadProgress: progressEvent => {
+              let complete = (progressEvent.loaded / progressEvent.total * 100 | 0) + '%'
+              console.log(complete)
+            }
+          }
+      ).then(response => {
+            console.log(response.data.data)
+          }
+      )
+    }
+
   },
   mounted() {
 
@@ -94,10 +118,12 @@ export default {
       smartypants: true,
       xhtml: false
     });
-
-    let article = JSON.parse(localStorage.getItem('article'))
-    this.article = article;
-    this.content = article.content;
+    if (localStorage.getItem('article') != null) {
+      let article = JSON.parse(localStorage.getItem('article'))
+      localStorage.removeItem('article')
+      this.article = article;
+      this.content = article.content;
+    }
   }
 }
 </script>
