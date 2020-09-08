@@ -58,9 +58,9 @@ export default {
   },
 
   methods: {
-    editor: function (article) {
-      console.log(article)
-      localStorage.setItem('article', article)
+    editor: function (param) {
+      console.log(param)
+      localStorage.setItem('article', JSON.stringify(param))
       this.$router.push('/editor')
     },
     changeStatus: function (param) {

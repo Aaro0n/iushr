@@ -25,19 +25,26 @@ export default {
   name: "Editor",
   data() {
     return {
+      article: null,
       showMD: false,
-      showED: !this.showMD,
-      content: "",
-      rawHtml: "xxxx",
+      showED: true,
+      content: '',
+      rawHtml: "",
     }
   },
 
   methods: {
     publish: function (type) {
       let article = {
+        'id': 0,
         'title': this.content.substring(0, this.content.indexOf('\n')).replace(/#/g, "").trim(),
         'content': this.content,
         'type': type,
+        'categoryId': 0,
+      }
+      if (this.article != null) {
+        article.id = this.article.id
+        article.categoryId = this.article.categoryId
       }
       axios.post('http://127.0.0.1:8081/article',
           article,
@@ -49,6 +56,7 @@ export default {
           }
       ).then(response => {
         console.log(response.data)
+        this.$router.push('/admin')
       })
     },
     preview: function () {
@@ -76,6 +84,11 @@ export default {
       smartypants: true,
       xhtml: false
     });
+
+    let article = JSON.parse(localStorage.getItem('article'))
+    console.log(article);
+    this.article = article;
+    this.content = article.content;
   }
 }
 </script>
