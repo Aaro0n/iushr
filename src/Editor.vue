@@ -5,8 +5,7 @@
       <p v-html="rawHtml"></p>
     </div>
     <div id="header" v-show="showED">
-      <i class="el-icon-arrow-left" @click="back">
-      </i>
+      <i class="el-icon-arrow-left" @click="back"></i>
       <div>
         <el-button size="medium" plain v-on:click="publish(0)">发布</el-button>
         <el-button size="medium" plain v-on:click="publish(1)">保存</el-button>
@@ -14,7 +13,7 @@
       </div>
     </div>
     <div id="content" v-show="showED">
-      <textarea id="text" v-model="content"></textarea>
+      <textarea placeholder="Start Type!!!" v-model="content"></textarea>
     </div>
   </div>
 </template>
@@ -97,7 +96,6 @@ export default {
     });
 
     let article = JSON.parse(localStorage.getItem('article'))
-    console.log(article);
     this.article = article;
     this.content = article.content;
   }
@@ -107,14 +105,16 @@ export default {
 <style scoped>
 
 #editor {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   height: 100%;
   width: 100%;
-  padding: 0;
-  margin: 0;
 }
 
 #markdown {
   padding: 30px 80px;
+  flex-grow: 0;
 }
 
 #closeBtn {
@@ -125,9 +125,7 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 10%;
-  margin-right: 20px;
-  margin-left: 20px;
+  margin: 20px 38px;
 }
 
 #content {
@@ -135,16 +133,29 @@ export default {
   justify-content: center;
   align-items: flex-start;
   height: 100%;
+  padding-right: 38px;
+  padding-left: 38px;
+  padding-bottom: 63px;
 }
 
-#text {
-  height: 85%;
-  width: 80%;
+textarea {
+  height: 100%;
+  width: 100%;
+  padding: 20px;
   border: none;
-  border-radius: 1px;
-  background-color: #f1f1f1;
+  background-color: #FFF;
   resize: none;
-  cursor: pointer;
+  font-size: 20px;
+  color: #606266;
+}
+
+textarea:focus {
+  outline: none !important;
+  border-color: #DCDFE6;
+  box-shadow: 0 0 10px #DCDFE6;
+}
+
+p {
   font-size: 20px;
 }
 
