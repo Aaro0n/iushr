@@ -5,9 +5,13 @@
       <p v-html="rawHtml"></p>
     </div>
     <div id="header" v-show="showED">
-      <el-button size="medium" plain v-on:click="publish(0)">发布</el-button>
-      <el-button size="medium" plain v-on:click="publish(1)">保存</el-button>
-      <el-button size="medium" plain v-on:click="preview">预览</el-button>
+      <i class="el-icon-arrow-left" @click="back">
+      </i>
+      <div>
+        <el-button size="medium" plain v-on:click="publish(0)">发布</el-button>
+        <el-button size="medium" plain v-on:click="publish(1)">保存</el-button>
+        <el-button size="medium" plain v-on:click="preview">预览</el-button>
+      </div>
     </div>
     <div id="content" v-show="showED">
       <textarea id="text" v-model="content"></textarea>
@@ -59,15 +63,22 @@ export default {
         this.$router.push('/admin')
       })
     },
+
     preview: function () {
       this.rawHtml = marked(this.content).replace(/<pre>/g, "<pre class='hljs'>")
       this.showMD = true
       this.showED = false
     },
+
     closeMarkdown: function () {
       this.showMD = false
       this.showED = true
-    }
+    },
+
+    back: function () {
+      this.$router.push('/admin')
+    },
+
   },
   mounted() {
 
@@ -112,10 +123,11 @@ export default {
 
 #header {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   align-items: center;
   height: 10%;
   margin-right: 20px;
+  margin-left: 20px;
 }
 
 #content {
