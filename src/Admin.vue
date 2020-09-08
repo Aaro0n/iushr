@@ -3,8 +3,10 @@
     <el-button v-on:click="editor(null)">TYPE</el-button>
 
     <div>
-      <el-table :data="articles" style="width: 100%"
-                max-height="390">
+      <el-table
+          :data="articles"
+          style="width: 100%"
+          max-height="390">
 
         <el-table-column
             label="日期"

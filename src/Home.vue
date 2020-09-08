@@ -1,9 +1,9 @@
 <template>
-  <div id="home">
+  <div style="height: 100%;width: 100%">
     <div id="logo">{{ title }}</div>
     <div id="blogs">
       <ul>
-        <li v-for="article in articles" :key="article.id" id="title">
+        <li v-for="article in articles" :key="article.id">
           <router-link :to="'/blog/'+article.id">{{ article.title }}</router-link>
         </li>
       </ul>
@@ -38,7 +38,7 @@ a {
 }
 
 a:link {
-  color: #000
+  color: #606266;
 }
 
 a:visited {
@@ -46,51 +46,42 @@ a:visited {
 }
 
 a:hover {
-  text-decoration: underline;
+  border-bottom: 1px solid #909399;
+  padding-bottom: 5px;
 }
 
 #logo {
   position: fixed;
-  left: 0;
-  top: 0;
-  z-index: 10;
-  width: 48px;
-  height: 48px;
-  color: black;
-  text-align: center;
+  color: #909399;
   font-size: 30px;
-  line-height: 48px;
   margin-top: 20px;
   margin-left: 20px;
-  font-family: "Verdana", Times, serif;
+  font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
 }
 
 #blogs {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 100px;
-  margin-bottom: 80px;
-}
-
-#title {
-  font-size: 20px;
-  padding-bottom: 5px;
-  margin-bottom: 15px;
-  width: 400px;
-  font-family: "Verdana", Times, serif;
-  text-align: center;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  width: 100%;
+  height: 100%;
 }
 
 ul {
   list-style-type: none;
+  max-height: 300px;
+  overflow: scroll;
 }
 
 li {
-  border-bottom: 1px solid #f3f3f3;
+  font-size: 20px;
+  height: 50px;
+  width: 400px;
+  font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 </style>
