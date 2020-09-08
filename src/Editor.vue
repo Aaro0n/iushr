@@ -1,5 +1,5 @@
 <template>
-  <div id="editor">
+  <div id="editor" v-loading.fullscreen.lock="fullscreenLoading">
     <div v-show="showMD" id="markdown">
       <i class="el-icon-close" id="closeBtn" v-on:click="closeMarkdown"></i>
       <p v-html="rawHtml"></p>
@@ -33,6 +33,7 @@ export default {
       showED: true,
       content: "",
       rawHtml: "",
+      fullscreenLoading: false,
     }
   },
 
@@ -79,6 +80,7 @@ export default {
     },
 
     drop: function (event) {
+      this.fullscreenLoading = true;
       event.preventDefault();
       let file = event.dataTransfer.files[0]
       console.log("drop" + file.type)
@@ -97,7 +99,9 @@ export default {
             }
           }
       ).then(response => {
-            console.log(response.data.data)
+            this.fullscreenLoading = false
+            this.content = this.content + '\n![avatar](' + 'http://127.0.0.1:8081' + response.data.data.data + ')'
+            console.log(response.data.data.data)
           }
       )
     }
