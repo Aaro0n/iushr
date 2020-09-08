@@ -17,8 +17,6 @@ Vue.component('todo-item', {
     props: ['title']
 })
 
-// Vue.component('VueShowdown', VueShowdown)
-
 new Vue({
     router,
     render: h => h(App),
