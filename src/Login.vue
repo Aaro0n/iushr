@@ -1,16 +1,17 @@
 <template>
   <div id="form">
-    <div id="content">
-      <div class="un">
-        <div class="name">用户名：</div>
-        <input v-model="username" placeholder="请输入用户名">
+    <div>
+      <div class="input">
+        <div class="title">用户名:</div>
+        <el-input v-model="username" placeholder="请输入用户名"></el-input>
       </div>
-      <div class="un" style="margin-top: 10px">
-        <div class="name">密码：</div>
-        <input type="password" v-model="password" placeholder="请输入密码">
+      <div style="margin-top: 18px" class="input">
+        <div class="title">密&emsp;码:</div>
+        <el-input placeholder="请输入密码" v-model="password" show-password></el-input>
       </div>
-      <div style="text-align: center">
-        <button id="login_btn" v-on:click="login">登录</button>
+      <div style="text-align: center; margin-top: 28px">
+        <el-button type="primary" plain size="medium" v-on:click="login">&emsp;&emsp;&emsp;登录&emsp;&emsp;&emsp;
+        </el-button>
       </div>
     </div>
   </div>
@@ -50,31 +51,22 @@ export default {
 
 #form {
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
+  align-content: center;
   width: 100%;
   height: 100%;
 }
 
-
-.un {
-  height: 40px;
+.input {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.name {
-  display: inline-block;
+.title {
   width: 100px;
+  color: #303133;
 }
-
-input {
-  height: 30px;
-}
-
-#login_btn {
-  margin-top: 20px;
-  width: 200px;
-  height: 30px;
-}
-
 
 </style>
