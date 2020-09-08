@@ -1,15 +1,17 @@
 <template>
   <div id="admin">
-    <el-button v-on:click="editor(null)">Editor</el-button>
+    <el-button v-on:click="editor(null)">TYPE</el-button>
 
     <div>
       <el-table :data="articles" style="width: 100%"
                 max-height="390">
 
         <el-table-column
-            prop="updateTime"
             label="日期"
             width="180">
+          <template slot-scope="scope">
+            <span>{{ new Date(scope.row.updateTime).toDateString() }}</span>
+          </template>
         </el-table-column>
 
         <el-table-column
@@ -20,7 +22,7 @@
 
         <el-table-column
             label="操作"
-            width="100">
+            width="110">
           <template slot-scope="scope">
             <el-button type="text" size="small" v-on:click="preview(scope.row)">查看</el-button>
             <el-button @click="editor(scope.row)" type="text" size="small">编辑</el-button>
@@ -37,6 +39,16 @@
                 active-color="#13ce66"
                 inactive-color="#ff4949">
             </el-switch>
+          </template>
+        </el-table-column>
+
+        <el-table-column
+            label="删除"
+            width="80">
+          <template slot-scope="scope">
+            <i class="el-icon-delete"
+               @click="deleteItem(scope.row)">
+            </i>
           </template>
         </el-table-column>
 
@@ -79,19 +91,55 @@ export default {
         console.log(response.data)
       })
     },
+
     preview: function (param) {
       this.$router.push('/blog/' + param.id)
-    }
+    },
 
+    deleteItem: function (param) {
+      this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        axios.delete('http://127.0.0.1:8081/article/' + param.id, {
+          headers: {
+            'token': localStorage.getItem('token')
+          }
+        }).then(response => {
+          if (response.data.code === 0) {
+            this.getAllArticle();
+            this.$message({
+              type: 'success',
+              message: '删除成功!'
+            });
+          } else {
+            this.$message({
+              type: 'error',
+              message: '删除失败!'
+            });
+          }
+        })
+
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '已取消删除'
+        });
+      });
+    },
+
+    getAllArticle: function () {
+      axios.get("http://127.0.0.1:8081/article").then(response => {
+        this.articles = response.data.data
+        this.articles.forEach(it => {
+          it.type = it.type === 0
+        })
+      })
+    },
   },
   mounted() {
-    axios.get("http://127.0.0.1:8081/article").then(response => {
-      this.articles = response.data.data
-      this.articles.forEach(it => {
-        it.type = it.type === 0
-      })
-      console.log(this.articles)
-    })
+    this.getAllArticle()
   },
 }
 </script>
