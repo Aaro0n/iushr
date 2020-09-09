@@ -37,7 +37,7 @@ export default {
         console.log(response.data)
         if (response.data.code === 0) {
           localStorage.setItem("token", response.data.data.token)
-          this.$router.push("/upload")
+          this.$router.push("/admin")
         } else {
           console.log(response.data.data.message)
         }

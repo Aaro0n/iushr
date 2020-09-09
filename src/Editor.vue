@@ -94,6 +94,9 @@ export default {
 
   },
   mounted() {
+    if (localStorage.getItem('token') === null) {
+      this.$router.push('/login')
+    }
     marked.setOptions({
       highlight: function (code) {
         return hljs.highlightAuto(code).value;
@@ -107,7 +110,8 @@ export default {
       smartypants: true,
       xhtml: false
     });
-    if (localStorage.getItem('article') != null) {
+    if (localStorage.getItem('article') !== 'null' && localStorage.getItem('article') !== null) {
+      console.log(localStorage.getItem('article'))
       let article = JSON.parse(localStorage.getItem('article'))
       localStorage.removeItem('article')
       this.article = article;
