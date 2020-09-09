@@ -1,7 +1,5 @@
 <template>
-  <div id="markdown">
-    <div v-html="rawHtml"></div>
-  </div>
+  <div class="markdown-body" v-html="rawHtml"></div>
 </template>
 
 <script>
@@ -10,6 +8,7 @@ import axios from "axios";
 import marked from 'marked';
 import hljs from 'highlight.js';
 import 'highlight.js/styles/tomorrow-night.css';
+import 'github-markdown-css/github-markdown.css';
 
 export default {
   name: "Blog",
@@ -47,12 +46,18 @@ export default {
 
 <style scoped>
 
-#markdown {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding-left: 80px;
-  padding-right: 80px;
+.markdown-body {
+  box-sizing: border-box;
+  min-width: 200px;
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 45px;
+}
+
+@media (max-width: 767px) {
+  .markdown-body {
+    padding: 15px;
+  }
 }
 
 </style>

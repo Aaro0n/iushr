@@ -1,11 +1,12 @@
 <template>
-  <div id="markdown" v-html="rawHtml"></div>
+  <div class="markdown-body" v-html="rawHtml"></div>
 </template>
 
 <script>
 import marked from 'marked';
 import hljs from 'highlight.js';
-import 'highlight.js/styles/tomorrow-night.css';
+import 'highlight.js/styles/github.css';
+import 'github-markdown-css/github-markdown.css'
 
 export default {
   name: "Preview",
@@ -43,10 +44,18 @@ export default {
 
 <style>
 
-#markdown {
-  padding-top: 50px;
-  padding-left: 100px;
-  padding-right: 80px;
+.markdown-body {
+  box-sizing: border-box;
+  min-width: 200px;
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 45px;
+}
+
+@media (max-width: 767px) {
+  .markdown-body {
+    padding: 15px;
+  }
 }
 
 </style>

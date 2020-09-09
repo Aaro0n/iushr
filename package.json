@@ -10,6 +10,7 @@
   "dependencies": {
     "core-js": "^2.6.5",
     "element-ui": "^2.7.2",
+    "github-markdown-css": "^4.0.0",
     "highlight": "^0.2.4",
     "highlight.js": "^10.1.2",
     "js-md5": "^0.7.3",
