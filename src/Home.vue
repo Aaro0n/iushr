@@ -42,21 +42,20 @@ a:link {
 }
 
 a:visited {
-  color: #BEBEBE
+  color: #BEBEBE;
 }
 
 a:hover {
-  border-bottom: 1px solid #909399;
+  border-bottom: 1px solid #409EFF;
   padding-bottom: 5px;
 }
 
 #logo {
   position: fixed;
-  color: #909399;
+  color: #409EFF;
   font-size: 30px;
-  margin-top: 20px;
+  margin-top: 13px;
   margin-left: 20px;
-  font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
 }
 
 #blogs {
@@ -73,15 +72,15 @@ ul {
   overflow: scroll;
 }
 
+
 li {
+  padding-left: 15px;
+  padding-right: 15px;
   font-size: 20px;
   height: 50px;
-  width: 400px;
-  font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
   text-align: center;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  line-height: 50px;
+  overflow: scroll;
 }
 
 </style>
