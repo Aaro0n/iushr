@@ -33,7 +33,7 @@ export default {
     login: function () {
       let passwd = md5(this.password)
       let loginData = {'name': this.username, 'password': passwd}
-      axios.post('http://127.0.0.1:8081/login', loginData).then(response => {
+      axios.post(this.COMMON.server + 'login', loginData).then(response => {
         console.log(response.data)
         if (response.data.code === 0) {
           localStorage.setItem("token", response.data.data.token)

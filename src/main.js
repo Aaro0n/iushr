@@ -3,19 +3,12 @@ import App from './App.vue'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import router from './router/router'
+import Common from './common'
+
 
 Vue.use(ElementUI);
 Vue.config.productionTip = false;
-
-Vue.component('todo-item', {
-    template: '\
-    <li>\
-      {{ title }}\
-      <button v-on:click="$emit(\'remove\')">Remove</button>\
-    </li>\
-  ',
-    props: ['title']
-})
+Vue.prototype.COMMON = Common;
 
 new Vue({
     router,

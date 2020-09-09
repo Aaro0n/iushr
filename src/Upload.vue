@@ -17,7 +17,7 @@ export default {
       console.log("drop" + file.type)
       let formData = new FormData();
       formData.append("file", file)
-      axios.post('http://127.0.0.1:8081/upload',
+      axios.post(this.COMMON.server + 'upload',
           formData,
           {
             headers: {

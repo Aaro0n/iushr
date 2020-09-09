@@ -81,7 +81,7 @@ export default {
       let typeValue = param.type === true ? 0 : 1
       let formData = new FormData()
       formData.append('type', typeValue)
-      axios.post('http://127.0.0.1:8081/article/' + param.id,
+      axios.post(this.COMMON.server + 'article/' + param.id,
           formData,
           {
             headers: {
@@ -104,7 +104,7 @@ export default {
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
-        axios.delete('http://127.0.0.1:8081/article/' + param.id, {
+        axios.delete(this.COMMON.server + 'article/' + param.id, {
           headers: {
             'token': localStorage.getItem('token')
           }
@@ -132,7 +132,7 @@ export default {
     },
 
     getAllArticle: function () {
-      axios.get("http://127.0.0.1:8081/article").then(response => {
+      axios.get(this.COMMON.server + "article").then(response => {
         this.articles = response.data.data
         this.articles.forEach(it => {
           it.type = it.type === 0

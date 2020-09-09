@@ -36,7 +36,7 @@ export default {
       xhtml: false
     });
 
-    axios.get("http://127.0.0.1:8081/article/" + this.articleId).then(response => {
+    axios.get(this.COMMON.server + "article/" + this.articleId).then(response => {
       this.article = response.data.data
       this.rawHtml = marked(this.article.content).replace(/<pre>/g, "<pre class='hljs'>")
     })

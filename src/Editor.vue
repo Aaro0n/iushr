@@ -43,7 +43,7 @@ export default {
         article.id = this.article.id
         article.categoryId = this.article.categoryId
       }
-      axios.post('http://127.0.0.1:8081/article',
+      axios.post(this.COMMON.server + 'article',
           article,
           {
             headers: {
@@ -73,7 +73,7 @@ export default {
       let file = event.dataTransfer.files[0]
       let formData = new FormData();
       formData.append("file", file)
-      axios.post('http://127.0.0.1:8081/upload',
+      axios.post(this.COMMON.server + 'upload',
           formData,
           {
             headers: {
@@ -87,7 +87,7 @@ export default {
           }
       ).then(response => {
             this.fullscreenLoading = false
-            this.content = this.content + '\n![avatar](' + 'http://127.0.0.1:8081' + response.data.data.data + ')'
+            this.content = this.content + '\n![avatar](' + this.COMMON.server + response.data.data.data + ')'
           }
       )
     }
