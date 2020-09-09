@@ -1,10 +1,6 @@
 <template>
   <div id="editor" v-loading.fullscreen.lock="fullscreenLoading">
-    <div v-show="showMD" id="markdown">
-      <i class="el-icon-close" id="closeBtn" v-on:click="closeMarkdown"></i>
-      <p v-html="rawHtml"></p>
-    </div>
-    <div id="header" v-show="showED">
+    <div id="header">
       <i class="el-icon-arrow-left" @click="back"></i>
       <div>
         <el-button size="medium" plain v-on:click="publish(0)">发布</el-button>
@@ -12,7 +8,7 @@
         <el-button size="medium" plain v-on:click="preview">预览</el-button>
       </div>
     </div>
-    <div id="content" v-show="showED" @dragover.prevent @dragenter.prevent @dragleave.prevent v-on:drop="drop">
+    <div id="content" @dragover.prevent @dragenter.prevent @dragleave.prevent v-on:drop="drop">
       <textarea placeholder="Start Type!!!" v-model="content"></textarea>
     </div>
   </div>
@@ -22,15 +18,12 @@
 import axios from "axios";
 import marked from 'marked';
 import hljs from 'highlight.js';
-import 'highlight.js/styles/tomorrow-night.css';
 
 export default {
   name: "Editor",
   data() {
     return {
       article: null,
-      showMD: false,
-      showED: true,
       content: "",
       rawHtml: "",
       fullscreenLoading: false,
@@ -65,14 +58,9 @@ export default {
     },
 
     preview: function () {
-      this.rawHtml = marked(this.content).replace(/<pre>/g, "<pre class='hljs'>")
-      this.showMD = true
-      this.showED = false
-    },
-
-    closeMarkdown: function () {
-      this.showMD = false
-      this.showED = true
+      let route = this.$router.resolve({path: '/preview'})
+      window.open(route.href, '_blank');
+      localStorage.setItem('preview', this.content);
     },
 
     back: function () {
@@ -83,7 +71,6 @@ export default {
       this.fullscreenLoading = true;
       event.preventDefault();
       let file = event.dataTransfer.files[0]
-      console.log("drop" + file.type)
       let formData = new FormData();
       formData.append("file", file)
       axios.post('http://127.0.0.1:8081/upload',
@@ -101,14 +88,12 @@ export default {
       ).then(response => {
             this.fullscreenLoading = false
             this.content = this.content + '\n![avatar](' + 'http://127.0.0.1:8081' + response.data.data.data + ')'
-            console.log(response.data.data.data)
           }
       )
     }
 
   },
   mounted() {
-
     marked.setOptions({
       highlight: function (code) {
         return hljs.highlightAuto(code).value;
@@ -142,15 +127,6 @@ export default {
   width: 100%;
 }
 
-#markdown {
-  padding: 30px 80px;
-  flex-grow: 0;
-}
-
-#closeBtn {
-  float: right;
-}
-
 #header {
   display: flex;
   justify-content: space-between;
@@ -175,7 +151,7 @@ textarea {
   border: none;
   background-color: #FFF;
   resize: none;
-  font-size: 20px;
+  font-size: 14px;
   color: #606266;
 }
 
@@ -183,10 +159,6 @@ textarea:focus {
   outline: none !important;
   border-color: #DCDFE6;
   box-shadow: 0 0 10px #DCDFE6;
-}
-
-p {
-  font-size: 20px;
 }
 
 </style>

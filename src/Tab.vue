@@ -9,6 +9,8 @@
     <router-link to="/editor">Editor</router-link>
     <br>
     <router-link to="/admin">Admin</router-link>
+    <br>
+    <router-link to="/preview">Preview</router-link>
   </div>
 </template>
 

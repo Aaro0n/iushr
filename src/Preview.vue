@@ -1,28 +1,28 @@
 <template>
-  <div id="markdown">
-    <div v-html="rawHtml"></div>
-  </div>
+  <div id="markdown" v-html="rawHtml"></div>
 </template>
 
 <script>
-
-import axios from "axios";
 import marked from 'marked';
 import hljs from 'highlight.js';
 import 'highlight.js/styles/tomorrow-night.css';
 
 export default {
-  name: "Blog",
+  name: "Preview",
   data() {
     return {
-      rawHtml: "",
-      articleId: this.$route.params.id,
-      article: {content: ""}
+      rawHtml: '',
+    }
+  },
+
+  methods: {
+    rendering: function () {
+      let content = localStorage.getItem('preview');
+      this.rawHtml = marked(content).replace(/<pre>/g, "<pre class='hljs'>");
     }
   },
 
   mounted() {
-
     marked.setOptions({
       highlight: function (code) {
         return hljs.highlightAuto(code).value;
@@ -36,22 +36,16 @@ export default {
       smartypants: true,
       xhtml: false
     });
-
-    axios.get("http://127.0.0.1:8081/article/" + this.articleId).then(response => {
-      this.article = response.data.data
-      this.rawHtml = marked(this.article.content).replace(/<pre>/g, "<pre class='hljs'>")
-    })
-  }
+    this.rendering()
+  },
 }
 </script>
 
-<style scoped>
+<style>
 
 #markdown {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding-left: 80px;
+  padding-top: 50px;
+  padding-left: 100px;
   padding-right: 80px;
 }
 
