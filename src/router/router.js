@@ -31,7 +31,7 @@ export default router
 router.beforeEach((to, from, next) => {
     /* must call `next` */
     if (to.path === "/") {
-        next({path: "/tab"})
+        next({path: "/home"})
     }
     console.log(to.path);
     next()

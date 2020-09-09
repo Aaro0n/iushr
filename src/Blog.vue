@@ -7,7 +7,7 @@
 import axios from "axios";
 import marked from 'marked';
 import hljs from 'highlight.js';
-import 'highlight.js/styles/tomorrow-night.css';
+import 'highlight.js/styles/github.css';
 import 'github-markdown-css/github-markdown.css';
 
 export default {
