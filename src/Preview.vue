@@ -20,6 +20,7 @@ export default {
     rendering: function () {
       let content = localStorage.getItem('preview');
       this.rawHtml = marked(content).replace(/<pre>/g, "<pre class='hljs'>");
+      localStorage.removeItem('preview')
     }
   },
 

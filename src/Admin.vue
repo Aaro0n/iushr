@@ -95,7 +95,9 @@ export default {
     },
 
     preview: function (param) {
-      this.$router.push('/blog/' + param.id)
+      localStorage.setItem('preview', param.content)
+      let route = this.$router.resolve({path: '/preview'})
+      window.open(route.href, '_blank');
     },
 
     deleteItem: function (param) {
