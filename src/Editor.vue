@@ -33,7 +33,7 @@ export default {
   methods: {
     publish: function (type) {
       let article = {
-        'id': 0,
+        'id': null,
         'title': this.content.substring(0, this.content.indexOf('\n')).replace(/#/g, "").trim(),
         'content': this.content,
         'type': type,
