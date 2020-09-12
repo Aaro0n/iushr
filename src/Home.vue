@@ -24,7 +24,7 @@ export default {
   },
 
   mounted() {
-    axios.get(this.COMMON.server + "articles").then(response => {
+    axios.get(this.COMMON.server + "article").then(response => {
       this.articles = response.data.data
     })
   },

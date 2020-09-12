@@ -43,7 +43,7 @@ export default {
         article.id = this.article.id
         article.categoryId = this.article.categoryId
       }
-      axios.post(this.COMMON.server + 'article',
+      axios.post(this.COMMON.admin_server + 'article',
           article,
           {
             headers: {
