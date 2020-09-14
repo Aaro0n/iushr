@@ -8,6 +8,7 @@ import Login from "@/Login";
 import Editor from '@/Editor';
 import Admin from '@/Admin';
 import Preview from '@/Preview';
+import Register from '@/Register';
 
 Vue.use(Router)
 
@@ -20,6 +21,7 @@ const routeMap = [
     {path: '/editor', component: Editor},
     {path: '/admin', component: Admin},
     {path: '/preview', component: Preview},
+    {path: '/register', component: Register},
 ];
 
 const router = new Router({
