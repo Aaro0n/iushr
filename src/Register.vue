@@ -39,7 +39,9 @@ export default {
         return;
       }
       let md5 = md5(this.password)
-      let registerData = {'name': this.username, 'password': md5}
+      let registerData = new FormData()
+      registerData.append('name', this.username)
+      registerData.append('password', md5)
       axios.post(this.COMMON.server + 'register', registerData).then(response => {
         if (response.data.code === 0) {
           this.$router.push("/login")

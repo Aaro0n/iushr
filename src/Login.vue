@@ -31,8 +31,10 @@ export default {
   },
   methods: {
     login: function () {
-      let passwd = md5(this.password)
-      let loginData = {'name': this.username, 'password': passwd}
+      let md5 = md5(this.password)
+      let loginData = new FormData()
+      loginData.append('name',this.username)
+      loginData.append('password',md5)
       axios.post(this.COMMON.server + 'login', loginData).then(response => {
         console.log(response.data)
         if (response.data.code === 0) {
